@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Invitara</title>
+<meta name="description" content="Invitaciones digitales para XV años, bodas y cumpleaños, con confirmación de asistencia y galería de fotos por QR.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Pinyon+Script&family=Jost:wght@400;500&display=swap">
+<style>
+/* Una tarjeta de invitación angosta, centrada, con enlaces como botones grandes para el pulgar. Look único (claro), como papel de invitación. */
+:root{
+  --papel:#F7EBE8;
+  --papel-2:#FBF4F2;
+  --rosa:#EFD3D0;
+  --vino:#A44A5C;
+  --vino-osc:#7E3443;
+  --oro:#B08A4E;
+  --tinta:#3A2328;
+  --tinta-2:#5A3E44;
+  --linea:#E2C6BF;
+  --f-script:'Pinyon Script', 'Snell Roundhand', cursive;
+  --f-display:'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --f-body:'Jost', 'Avenir Next', 'Segoe UI', sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--papel);color:var(--tinta);font-family:var(--f-body);font-size:16px;line-height:1.5;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:40px 56px;
+}
+.tarjeta{max-width:460px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+header{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.mono{width:104px;height:104px;border-radius:50%;background:var(--vino);display:grid;place-items:center;box-shadow:0 0 0 4px var(--papel),0 0 0 5px var(--oro)}
+.mono span{font-family:var(--f-script);font-size:76px;line-height:1;color:var(--papel-2);padding-right:10px;margin-top:6px}
+h1{margin:6px 0 0;font-family:var(--f-script);font-weight:400;font-size:64px;line-height:1;color:var(--vino)}
+.sub{margin:0;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#6B4E36}
+.lema{margin:6px 0 0;font-family:var(--f-display);font-style:italic;font-size:22px;line-height:1.3;color:var(--tinta-2);text-wrap:balance}
+.promo{border:1px dashed var(--oro);border-radius:14px;padding:14px 18px;text-align:center;background:var(--papel-2)}
+.promo b{display:block;font-family:var(--f-display);font-size:24px;font-weight:600;color:var(--vino)}
+.promo span{font-size:14px;color:var(--tinta-2)}
+.enlaces{display:flex;flex-direction:column;gap:12px}
+.btn{display:flex;align-items:center;gap:14px;min-height:58px;padding:12px 20px;border-radius:999px;background:var(--papel-2);border:1px solid var(--linea);color:var(--tinta);text-decoration:none;font-weight:500;font-size:16px;transition:transform .15s ease,border-color .15s ease}
+.btn:hover{border-color:var(--oro);transform:translateY(-1px)}
+.btn:focus-visible{outline:3px solid var(--vino);outline-offset:3px}
+.btn svg{flex:none;width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.btn .txt{flex:1;min-width:0}
+.btn .txt small{display:block;font-weight:400;font-size:13px;color:var(--tinta-2)}
+.btn.principal{background:var(--vino);border-color:var(--vino);color:#FFFFFF}
+.btn.principal .txt small{color:#F6E4E1}
+.btn.principal:hover{background:var(--vino-osc)}
+.btn.pronto{opacity:.55;pointer-events:none}
+.btn .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-2)}
+h2{margin:0 0 14px;font-family:var(--f-display);font-weight:600;font-size:30px;line-height:1.1;text-align:center}
+.paquetes{display:flex;flex-direction:column;gap:12px}
+.paq{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:18px 20px;border-top:1px solid var(--linea)}
+.paq:last-child{border-bottom:1px solid var(--linea)}
+.paq h3{margin:0;font-family:var(--f-display);font-size:24px;font-weight:600}
+.paq .precio{font-family:var(--f-display);font-size:26px;font-weight:600;color:var(--vino);font-variant-numeric:tabular-nums;text-align:right}
+.paq p{grid-column:1 / -1;margin:0;font-size:15px;color:var(--tinta-2)}
+.paq.destacado{background:var(--papel-2);border:1px solid var(--oro);border-radius:14px}
+.paq.destacado + .paq{border-top:none}
+.paq .marca{grid-column:1 / -1;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--oro);font-weight:500}
+.pasos{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;counter-reset:p}
+.pasos li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;counter-increment:p}
+.pasos li::before{content:counter(p);width:40px;height:40px;border-radius:50%;border:1px solid var(--oro);display:grid;place-items:center;font-family:var(--f-display);font-size:22px;font-weight:600;color:var(--vino)}
+.pasos b{display:block;font-weight:500}
+.pasos span{font-size:15px;color:var(--tinta-2)}
+.nota{margin:12px 0 0;font-size:13px;text-align:center;color:var(--tinta-2)}
+.legal{display:flex;flex-direction:column;gap:10px}
+.legal details{border:1px solid var(--linea);border-radius:14px;background:var(--papel-2)}
+.legal summary{cursor:pointer;padding:16px 20px;font-family:var(--f-display);font-size:22px;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.legal summary::-webkit-details-marker{display:none}
+.legal summary::after{content:"+";font-family:var(--f-body);font-weight:400;font-size:24px;color:var(--vino)}
+.legal details[open] summary::after{content:"–"}
+.legal summary:focus-visible{outline:3px solid var(--vino);outline-offset:2px;border-radius:14px}
+.legal-txt{padding:0 20px 20px;font-size:14.5px;line-height:1.6;color:var(--tinta-2)}
+.legal-txt h3{margin:18px 0 6px;font-family:var(--f-body);font-size:15px;font-weight:500;color:var(--tinta)}
+.legal-txt p,.legal-txt ul{margin:0 0 8px}
+.legal-txt ul{padding-left:20px}
+.legal-txt .fecha{font-size:13px;font-style:italic}
+footer{text-align:center;font-size:13px;color:var(--tinta-2)}
+footer nav{margin-top:10px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+footer nav a{color:var(--vino);text-underline-offset:3px}
+footer nav a:focus-visible{outline:3px solid var(--vino);outline-offset:2px}
+footer .script{font-family:var(--f-script);font-size:30px;color:var(--vino);display:block;line-height:1.2}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}.btn:hover{transform:none}}
+</style>
+<meta name="theme-color" content="#A44A5C">
+<link rel="canonical" href="https://alex10ja1.github.io/invitara/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Invitara">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://alex10ja1.github.io/invitara/">
+<meta property="og:title" content="Invitara · Invitaciones digitales">
+<meta property="og:description" content="Tu invitación en un link, con confirmación por WhatsApp y una galería donde tus invitados suben las fotos de la fiesta.">
+<meta property="og:image" content="https://alex10ja1.github.io/invitara/vista-previa.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Invitara, invitaciones digitales con galería de fotos por QR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Invitara · Invitaciones digitales">
+<meta name="twitter:description" content="Tu invitación en un link, con confirmación por WhatsApp y galería de fotos por QR.">
+<meta name="twitter:image" content="https://alex10ja1.github.io/invitara/vista-previa.png">
+</head>
+<body>
+
+<main class="tarjeta">
+  <header>
+    <div class="mono" aria-hidden="true"><span>I</span></div>
+    <h1>Invitara</h1>
+    <p class="sub">Invitaciones digitales</p>
+    <p class="lema">Tu invitación en un link, y las fotos de tu fiesta guardadas para siempre.</p>
+  </header>
+
+  <div class="promo">
+    <b>Precio de lanzamiento</b>
+    <span>Invitación visual desde $50 para los primeros 5 eventos</span>
+  </div>
+
+  <nav class="enlaces" aria-label="Enlaces de Invitara">
+    <a class="btn principal" data-link="whatsapp" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1c-1-.5-2-1.5-2.5-2.5l1-1-1-2z"/></svg>
+      <span class="txt">Cotiza tu invitación<small>Escríbenos por WhatsApp</small></span>
+    </a>
+    <a class="btn" data-link="demo" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>
+      <span class="txt">Ver invitación de muestra<small>Ábrela en tu celular como la verán tus invitados</small></span>
+    </a>
+    <a class="btn" data-link="canal" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l5 4V6L7 10z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+      <span class="txt">Canal de ejemplos<small>Nuevos diseños y promociones en WhatsApp</small></span>
+    </a>
+    <a class="btn" data-link="facebook" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4.5h-3a4 4 0 0 0-4 4V11H7.5v3.5H10V21h3.5v-6.5H16l.7-3.5h-3.2V8.6c0-.3.2-.6.5-.6z"/></svg>
+      <span class="txt">Facebook</span>
+    </a>
+    <a class="btn" data-link="tiktok" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.7 2.4 4.4 5 4.6"/></svg>
+      <span class="txt">TikTok</span>
+    </a>
+    <a class="btn" data-link="instagram" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17 7h.01"/></svg>
+      <span class="txt">Instagram</span>
+    </a>
+  </nav>
+
+  <section aria-labelledby="t-paquetes">
+    <h2 id="t-paquetes">Paquetes</h2>
+    <div class="paquetes">
+      <div class="paq">
+        <h3>Visual</h3><span class="precio">$200</span>
+        <p>Tu invitación con diseño a tu gusto, fecha, mapa, cuenta regresiva y música.</p>
+      </div>
+      <div class="paq">
+        <h3>Con confirmación</h3><span class="precio">$300</span>
+        <p>Todo lo de Visual, más confirmación de asistencia y tu lista de invitados en una hoja de cálculo.</p>
+      </div>
+      <div class="paq destacado">
+        <span class="marca">El más completo</span>
+        <h3>Experiencia</h3><span class="precio">$550</span>
+        <p>Todo lo anterior, más un QR en cada mesa para que tus invitados suban sus fotos. Al otro día recibes todas en tu Drive.</p>
+      </div>
+    </div>
+    <p class="nota">Precios en pesos mexicanos. Pregunta por cambios o extras. Al contratar aceptas nuestros <a href="#terminos" data-abrir="terminos">términos del servicio</a>.</p>
+  </section>
+
+  <section aria-labelledby="t-qr">
+    <h2 id="t-qr">Así funciona la galería por QR</h2>
+    <ol class="pasos">
+      <li><div><b>Un QR en cada mesa</b><span>Un tarjetón pequeño junto al centro de mesa.</span></div></li>
+      <li><div><b>Tus invitados suben sus fotos</b><span>Escanean con la cámara, sin descargar apps ni registrarse.</span></div></li>
+      <li><div><b>Tú te quedas con todas</b><span>Se guardan en una carpeta de Google Drive que es tuya.</span></div></li>
+    </ol>
+  </section>
+
+  <section class="legal" aria-label="Información legal">
+    <details id="terminos">
+      <summary>Términos del servicio</summary>
+      <div class="legal-txt">
+        <p class="fecha">Última actualización: 14 de octubre de 2026</p>
+
+        <h3>1. Qué hacemos</h3>
+        <p>Invitara diseña invitaciones digitales en forma de página web para eventos sociales. Lo que incluye cada contratación depende del paquete elegido (Visual, Con confirmación o Experiencia) y se confirma por escrito antes de empezar.</p>
+
+        <h3>2. Pagos</h3>
+        <ul>
+          <li>Para empezar el diseño se pide un anticipo del 50%. El 50% restante se paga antes de entregar el enlace final.</li>
+          <li>Si cancelas antes de que empecemos a diseñar, te devolvemos el anticipo. Una vez iniciado el diseño, el anticipo no es reembolsable.</li>
+        </ul>
+
+        <h3>3. Información del evento</h3>
+        <p>Tú nos das los nombres, fecha, hora, dirección, fotos y textos. Es tu responsabilidad que sean correctos y que tengas derecho a usar las fotos y la música que nos envíes. Antes de compartir la invitación, revísala con calma.</p>
+
+        <h3>4. Tiempo de entrega y correcciones</h3>
+        <ul>
+          <li>Entregamos la primera versión en un máximo de 3 días hábiles después de recibir toda la información.</li>
+          <li>Cada paquete incluye 2 rondas de correcciones. Las correcciones adicionales o un cambio de fecha después de entregada tienen un costo extra que te avisaremos antes.</li>
+        </ul>
+
+        <h3>5. Códigos QR para las mesas (paquete Experiencia)</h3>
+        <p>Te entregamos los códigos QR en un archivo listo para imprimir. La impresión, los soportes y la colocación de los QR en las mesas corren por tu cuenta o la de tu salón. Invitara no asiste al evento ni coloca material físico, salvo que se acuerde por escrito.</p>
+
+        <h3>6. Fotos de los invitados</h3>
+        <ul>
+          <li>Las fotos que suben tus invitados se guardan en una carpeta de Google Drive que te compartimos. Tú eres quien decide qué hacer con ellas.</li>
+          <li>Invitara no publica, comparte ni usa ninguna foto ni dato de tu evento sin tu permiso por escrito.</li>
+          <li>Te recomendamos avisar a tus invitados que las fotos que suban serán vistas por los demás en la galería.</li>
+        </ul>
+
+        <h3>7. Tiempo en línea</h3>
+        <p>Tu invitación y su galería estarán disponibles hasta 30 días después del evento. Después de ese plazo la desactivamos y la carpeta de fotos queda solo en tu cuenta. Si quieres que siga en línea más tiempo, pregúntanos.</p>
+
+        <h3>8. Uso como ejemplo</h3>
+        <p>Solo mostraremos tu invitación en nuestras redes como ejemplo si nos das permiso, y siempre quitando nombres, direcciones y fotos personales.</p>
+
+        <h3>9. Servicios de terceros</h3>
+        <p>Las invitaciones funcionan con servicios de terceros como GitHub, Google Drive y Google Sheets. No somos responsables de fallas de esos servicios ni de la conexión a internet del lugar del evento, pero te ayudaremos a resolver cualquier problema lo antes posible.</p>
+
+        <h3>10. Contacto</h3>
+        <p>Para cualquier duda escríbenos a invitacionesd3@gmail.com o por WhatsApp.</p>
+      </div>
+    </details>
+
+    <details id="privacidad">
+      <summary>Aviso de privacidad</summary>
+      <div class="legal-txt">
+        <p class="fecha">Última actualización: 14 de octubre de 2026</p>
+
+        <h3>Quién es responsable de tus datos</h3>
+        <p>Invitara, a cargo de [TU NOMBRE COMPLETO], con correo de contacto invitacionesd3@gmail.com, es responsable del uso y protección de tus datos personales.</p>
+
+        <h3>Qué datos recibimos</h3>
+        <ul>
+          <li><b>Del cliente:</b> nombre, teléfono o correo, datos del evento (fecha, lugar, nombres de los festejados) y las fotos que nos envía para la invitación.</li>
+          <li><b>De los invitados:</b> nombre y número de acompañantes cuando confirman asistencia, y las fotos que deciden subir a la galería.</li>
+        </ul>
+
+        <h3>Para qué los usamos</h3>
+        <p>Únicamente para crear la invitación, registrar las confirmaciones de asistencia y reunir las fotos del evento para el cliente. No vendemos, rentamos ni compartimos tus datos con nadie más, y no los usamos para publicidad.</p>
+
+        <h3>Dónde se guardan y por cuánto tiempo</h3>
+        <p>Las confirmaciones se guardan en una hoja de Google Sheets y las fotos en una carpeta de Google Drive, ambas compartidas con el cliente. Conservamos los datos mientras la invitación esté en línea y los borramos de nuestras cuentas a más tardar 60 días después del evento.</p>
+
+        <h3>Tus derechos</h3>
+        <p>Puedes pedirnos en cualquier momento ver, corregir o borrar tus datos, o retirar una foto que hayas subido. Escríbenos a invitacionesd3@gmail.com indicando el evento y lo que necesitas, y te responderemos en un máximo de 20 días hábiles.</p>
+
+        <h3>Cambios a este aviso</h3>
+        <p>Si cambiamos este aviso, publicaremos la nueva versión en esta misma página con su fecha de actualización.</p>
+      </div>
+    </details>
+  </section>
+
+  <footer>
+    <span class="script">Invitara</span>
+    XV años · Bodas · Cumpleaños · Bautizos
+    <nav aria-label="Legal">
+      <a href="#terminos" data-abrir="terminos">Términos del servicio</a>
+      <a href="#privacidad" data-abrir="privacidad">Aviso de privacidad</a>
+    </nav>
+  </footer>
+</main>
+
+<script>
+/* ===== EDITA AQUÍ TUS ENLACES =====
+   Deja un enlace vacío ("") y su botón aparece como "Próximamente". */
+const ENLACES = {
+  whatsapp:  "https://wa.me/52XXXXXXXXXX?text=Hola%20Invitara%2C%20quiero%20cotizar%20una%20invitaci%C3%B3n",
+  demo:      "https://alex10ja1.github.io/invitara-demo-xv/",
+  canal:     "",
+  facebook:  "",
+  tiktok:    "",
+  instagram: ""
+};
+document.querySelectorAll('[data-link]').forEach(function(a){
+  var url = ENLACES[a.getAttribute('data-link')] || "";
+  if (url && url.indexOf('XXXXXXXXXX') === -1) {
+    a.href = url;
+  } else {
+    a.classList.add('pronto');
+    a.setAttribute('aria-disabled','true');
+    a.removeAttribute('href');
+    var t = document.createElement('span');
+    t.className = 'tag';
+    t.textContent = 'Próximamente';
+    a.appendChild(t);
+  }
+});
+
+/* Abre términos o privacidad al tocar sus enlaces */
+function abrir(id){
+  var d = document.getElementById(id);
+  if (!d) return;
+  d.open = true;
+  d.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start'});
+}
+document.querySelectorAll('[data-abrir]').forEach(function(a){
+  a.addEventListener('click', function(e){ e.preventDefault(); abrir(a.getAttribute('data-abrir')); });
+});
+if (location.hash === '#terminos' || location.hash === '#privacidad') abrir(location.hash.slice(1));
+</script>
+</body>
+</html>
