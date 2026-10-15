@@ -86,6 +86,14 @@ footer nav{margin-top:10px;display:flex;justify-content:center;gap:18px;flex-wra
 footer nav a{color:var(--vino);text-underline-offset:3px}
 footer nav a:focus-visible{outline:3px solid var(--vino);outline-offset:2px}
 footer .script{font-family:var(--f-script);font-size:30px;color:var(--vino);display:block;line-height:1.2}
+.muestras{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:12px}
+.muestra{display:flex;flex-direction:column;gap:4px;padding:16px 18px 16px 22px;border:1px solid var(--linea);border-left:6px solid var(--color-muestra,var(--vino));border-radius:14px;background:var(--papel-2)}
+.muestra h3{margin:0;font-family:var(--f-display);font-size:22px;font-weight:600;line-height:1.15}
+.muestra .tipo{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-2)}
+.muestra a{align-self:flex-start;margin-top:8px;padding:6px 16px;border-radius:999px;background:var(--vino);color:#FFFFFF;font-weight:500;font-size:14px;text-decoration:none}
+.muestra a:hover{background:var(--vino-osc)}
+.muestra a:focus-visible{outline:3px solid var(--vino);outline-offset:3px}
+@media (min-width:700px){.muestras{grid-template-columns:1fr 1fr}}
 @media (prefers-reduced-motion:reduce){.btn{transition:none}.btn:hover{transform:none}}
 </style>
 <meta name="theme-color" content="#A44A5C">
@@ -146,6 +154,11 @@ footer .script{font-family:var(--f-script);font-size:30px;color:var(--vino);disp
       <span class="txt">Instagram</span>
     </a>
   </nav>
+
+  <section aria-labelledby="t-muestras">
+    <h2 id="t-muestras">Nuestras muestras</h2>
+    <ul class="muestras" id="lista-muestras"></ul>
+  </section>
 
   <section aria-labelledby="t-paquetes">
     <h2 id="t-paquetes">Paquetes</h2>
@@ -274,6 +287,27 @@ const ENLACES = {
   tiktok:    "",
   instagram: ""
 };
+
+/* ===== MUESTRAS: la más nueva va al inicio ===== */
+const MUESTRAS = [
+  { titulo: "Posada de los Robles", tipo: "Posada navideña", url: "https://alex10ja1.github.io/invitara-demo-posada/", color: "#A3392A" },
+  { titulo: "XV años · Valeria", tipo: "XV años", url: "https://alex10ja1.github.io/invitara-demo-xv/", color: "#B07A6E" }
+];
+(function(){
+  var lista = document.getElementById('lista-muestras');
+  if (!lista) return;
+  MUESTRAS.forEach(function(m){
+    var li = document.createElement('li');
+    li.className = 'muestra';
+    li.style.setProperty('--color-muestra', m.color);
+    var tipo = document.createElement('span'); tipo.className = 'tipo'; tipo.textContent = m.tipo;
+    var h3 = document.createElement('h3'); h3.textContent = m.titulo;
+    var a = document.createElement('a'); a.href = m.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Ver muestra';
+    a.setAttribute('aria-label', 'Ver muestra: ' + m.titulo);
+    li.appendChild(tipo); li.appendChild(h3); li.appendChild(a);
+    lista.appendChild(li);
+  });
+})();
 document.querySelectorAll('[data-link]').forEach(function(a){
   var url = ENLACES[a.getAttribute('data-link')] || "";
   if (url && url.indexOf('XXXXXXXXXX') === -1) {
