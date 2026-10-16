@@ -65,6 +65,9 @@ h2{margin:0 0 14px;font-family:var(--f-display);font-weight:600;font-size:30px;l
 .paq.destacado{background:var(--papel-2);border:1px solid var(--oro);border-radius:14px}
 .paq.destacado + .paq{border-top:none}
 .paq .marca{grid-column:1 / -1;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--oro);font-weight:500}
+.video{margin-top:12px;display:flex;flex-direction:column;gap:8px;padding:18px 20px;border:1px solid var(--linea);border-radius:14px;background:var(--papel-2)}
+.video h3{margin:0;font-family:var(--f-display);font-size:24px;font-weight:600}
+.video p{margin:0 0 4px;font-size:15px;color:var(--tinta-2)}
 .pasos{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;counter-reset:p}
 .pasos li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;counter-increment:p}
 .pasos li::before{content:counter(p);width:40px;height:40px;border-radius:50%;border:1px solid var(--oro);display:grid;place-items:center;font-family:var(--f-display);font-size:22px;font-weight:600;color:var(--vino)}
@@ -127,7 +130,7 @@ footer .script{font-family:var(--f-script);font-size:30px;color:var(--vino);disp
 
   <div class="promo">
     <b>Precio de lanzamiento</b>
-    <span>Las primeras 3 personas que contraten pagan menos: Visual $50, Con confirmación $200 y Experiencia $450.</span>
+    <span>Solo quedan 2 lugares con precio de lanzamiento: Visual $50, Con confirmación $200 y Experiencia $450.</span>
   </div>
 
   <nav class="enlaces" aria-label="Enlaces de Invitara">
@@ -166,20 +169,28 @@ footer .script{font-family:var(--f-script);font-size:30px;color:var(--vino);disp
     <h2 id="t-paquetes">Paquetes</h2>
     <div class="paquetes">
       <div class="paq">
-        <h3>Visual</h3><span class="precio"><span class="sr">Precio normal </span><s>$200</s><span class="sr">, precio de lanzamiento</span> $50</span>
+        <h3>Visual</h3><span class="precio"><span class="sr">Precio normal </span><s>$350</s><span class="sr">, precio de lanzamiento</span> $50</span>
         <p>Tu invitación con diseño a tu gusto, fecha, mapa, cuenta regresiva y música.</p>
       </div>
       <div class="paq">
-        <h3>Con confirmación</h3><span class="precio"><span class="sr">Precio normal </span><s>$300</s><span class="sr">, precio de lanzamiento</span> $200</span>
+        <h3>Con confirmación</h3><span class="precio"><span class="sr">Precio normal </span><s>$550</s><span class="sr">, precio de lanzamiento</span> $200</span>
         <p>Todo lo de Visual, más confirmación de asistencia y tu lista de invitados en una hoja de cálculo.</p>
       </div>
       <div class="paq destacado">
         <span class="marca">El más completo</span>
-        <h3>Experiencia</h3><span class="precio"><span class="sr">Precio normal </span><s>$600</s><span class="sr">, precio de lanzamiento</span> $450</span>
+        <h3>Experiencia</h3><span class="precio"><span class="sr">Precio normal </span><s>$990</s><span class="sr">, precio de lanzamiento</span> $450</span>
         <p>Todo lo anterior, más un QR en cada mesa para que tus invitados suban sus fotos. Al otro día recibes todas en tu Drive.</p>
       </div>
     </div>
-    <p class="nota">Precio de lanzamiento para las primeras 3 personas que contraten; después aplica el precio normal (tachado). Precios en pesos mexicanos. Pregunta por cambios o extras. Al contratar aceptas nuestros <a href="#terminos" data-abrir="terminos">términos del servicio</a>.</p>
+    <div class="video">
+      <h3>Invitación en video</h3>
+      <p>Se ve como video, con tu canción y botones para la iglesia y el salón. Cotización personalizada.</p>
+      <a class="btn principal" data-link="whatsapp" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1c-1-.5-2-1.5-2.5-2.5l1-1-1-2z"/></svg>
+        <span class="txt">Cotizar por WhatsApp</span>
+      </a>
+    </div>
+    <p class="nota">Solo quedan 2 lugares con precio de lanzamiento; después aplica el precio normal (tachado). Precios en pesos mexicanos. Cambios de datos (horas, nombres, direcciones, fotos o textos): gratis las veces que se necesiten, hasta el día del evento. Cambios de diseño (colores o acomodo): 3 rondas incluidas después de aprobar el boceto de la portada; cada ronda extra cuesta $50. Rehacer el diseño completo con otro estilo se cotiza aparte. Primera versión en máximo 7 días hábiles; invitación en video, de 5 a 7 días hábiles. Al contratar aceptas nuestros <a href="#terminos" data-abrir="terminos">términos del servicio</a>.</p>
   </section>
 
   <section aria-labelledby="t-qr">
@@ -195,7 +206,7 @@ footer .script{font-family:var(--f-script);font-size:30px;color:var(--vino);disp
     <details id="terminos">
       <summary>Términos del servicio</summary>
       <div class="legal-txt">
-        <p class="fecha">Última actualización: 14 de octubre de 2026</p>
+        <p class="fecha">Última actualización: 16 de octubre de 2026</p>
 
         <h3>1. Qué hacemos</h3>
         <p>Invitara diseña invitaciones digitales en forma de página web para eventos sociales. Lo que incluye cada contratación depende del paquete elegido (Visual, Con confirmación o Experiencia) y se confirma por escrito antes de empezar.</p>
@@ -209,10 +220,12 @@ footer .script{font-family:var(--f-script);font-size:30px;color:var(--vino);disp
         <h3>3. Información del evento</h3>
         <p>Tú nos das los nombres, fecha, hora, dirección, fotos y textos. Es tu responsabilidad que sean correctos y que tengas derecho a usar las fotos y la música que nos envíes. Antes de compartir la invitación, revísala con calma.</p>
 
-        <h3>4. Tiempo de entrega y correcciones</h3>
+        <h3>4. Tiempo de entrega y cambios</h3>
         <ul>
-          <li>Entregamos la primera versión en un máximo de 3 días hábiles después de recibir toda la información.</li>
-          <li>Cada paquete incluye 2 rondas de correcciones. Las correcciones adicionales o un cambio de fecha después de entregada tienen un costo extra que te avisaremos antes.</li>
+          <li>Entregamos la primera versión en un máximo de 7 días hábiles después de recibir toda la información. La invitación en video se entrega de 5 a 7 días hábiles.</li>
+          <li>Cambios de datos (horas, nombres, direcciones, fotos o textos): son gratis, las veces que se necesiten, hasta el día del evento.</li>
+          <li>Cambios de diseño (colores o acomodo): incluyen 3 rondas después de que apruebes el boceto de la portada. Cada ronda extra cuesta $50.</li>
+          <li>Rehacer el diseño completo con otro estilo se cotiza aparte.</li>
         </ul>
 
         <h3>5. Códigos QR para las mesas (paquete Experiencia)</h3>
